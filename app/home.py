@@ -1,135 +1,93 @@
 import streamlit as st
-import os
-import zipfile
-import requests
-from PIL import Image
-import numpy as np
-import pandas as pd
-import shutil
+import time
 
+from app.delete_create import delete_create_folder, prepare
+from app.api import perform_api_call
+from app.display import display_images, display_summary
 
 if 'ticker_entered' not in st.session_state:
     st.session_state['ticker_entered'] = False
 
-# *********  Erase and create folder  **************************************
-def delete_create_folder(folder_name):
-    # Delete folder if it exists
-    folder_exists = os.path.exists(folder_name)
-    if folder_exists:
-        # Remove a directory and all its contents
-        shutil.rmtree(folder_name)
-        # print(f"Folder '{folder_name}' deleted successfully.")
-
-    # Create folder
-    os.mkdir(folder_name)
-    # print(f"Folder '{folder_name}' created successfully.")
-# ***************************************************************************
-
-# **********  Function is launched when ticker is entered by user ***************
-def prepare():
-    # *********  Erase and create folder  ***************************************
-    delete_create_folder('raw_data')
-    delete_create_folder('extracted_data')
-    # ***************************************************************************
-    print('delete and create are done')
-
-    st.session_state['ticker_entered'] = True
-# ***************************************************************************
-
+#  Formatting
 st.markdown(
     """
     <style>
+
+    .stApp {
+        background-color: #000000;
+    }
+
     .title {
         text-align: center;
+        color : #EDF0F5;
     }
     .subtitle {
         text-align: center;
-        color: gray;
-        font-size: 1.5em;
+        color : #EDF0F5;
+        # font-size: 1.5em;
+        font-size: 1.4em;
     }
     .first-sentence {
         text-align: left;
         margin-top: 20px;
         font-size: 1.2em;
     }
+
+    div[data-testid="stTextInput"] > label {
+        color : #EDF0F5;
+        font-size: 1.2em;
+    }
+
+    .custom-spinner {
+        color: orange;  /* Change to your desired color */
+        font-size: 20px;  /* Optional: adjust font size */
+    }
     </style>
 
     <h1 class="title">Stock price prediction </h1>
-    <h2 class="subtitle">Based on Yahoo Finance information, what are the predictions of a stock price ?</h2>
+    <h2 class="subtitle"> This app helps users predict a stock price based on its ticker. </h2>
+    <h2 class="subtitle"> Based on at least 10-year historical data from Yahoo finance, the predictions are based on  LSTM cells. </h2>
+    <h2 class="subtitle"> It’s designed for Stock market enthusiasts looking for an easy way to esimate stock price movement. </h2>
     """,
     unsafe_allow_html=True
 )
 
 # Retrieve ticker from user
-ticker = st.text_input("Please enter a valid stock ticker :",
+ticker = st.text_input(label = "Please enter a valid stock ticker :",
               value="",
               max_chars=4,
               key=None,
               type="default",
               on_change=prepare,
-              placeholder="AAPL, MSFT, STLA for example")
-
-def perform_function():
-    st.write(f"The chosen ticker is {ticker}.")
-
-    # ************************** Connection to API ***************************************
-    # API endpoint
-    URL = "https://stockpriceprediction-yyzifgu2zq-od.a.run.app/ticker/"
-
-    # Sending POST request and saving the response as a response object
-    r = requests.get(url=URL, params={'query': ticker})
-
-    # st.write(r.status_code)
-
-    # Check if the response contains a ZIP file
-    if r.status_code == 200 and r.headers['Content-Type'] == 'application/zip':
-        # Save the ZIP file
-        with open("raw_data/output.zip", "wb") as file:
-            file.write(r.content)
-        print("ZIP file downloaded successfully!")
-    else:
-        print("Failed to download the ZIP file or incorrect response.")
-
-    # Open the ZIP file
-    with zipfile.ZipFile('raw_data/output.zip', 'r') as zip_ref:
-        # List all files within the ZIP
-        file_list = zip_ref.namelist()
-        # print("Files in the ZIP:", file_list)
-
-        # Extract all files to the current directory (optional)
-        zip_ref.extractall('extracted_data')
-    # **************************************************************************
-
-    # ******************** Display images ***********************************
-    # Load your images
-    train_test_pred_image = Image.open("extracted_data/data/processed_data/train_test_pred.png")
-    test_pred_image = Image.open("extracted_data/data/processed_data/test_pred.png")
-    test_pred_limited_image = Image.open("extracted_data/data/processed_data/test_pred_limited.png")
-
-    # Display the image in Streamlit
-    st.image(train_test_pred_image,
-            caption='train_test_pred_image',
-            use_column_width=True)
-
-    st.image(test_pred_image,
-            caption='test_pred_image',
-            use_column_width=True)
-
-    st.image(test_pred_limited_image,
-            caption='test_pred_limited_image',
-            use_column_width=True)
-    # **************************************************************************
-
-    # **************** Display dataframe ***************************************
-    path_to_csv = "extracted_data/summary.csv"
-    summary = pd.read_csv(path_to_csv)
-    summary = summary.set_index(keys = 'index')
-    st.write(summary)
-    # **************************************************************************
-    st.session_state['ticker_entered'] = False
-
+              placeholder="AAPL, MSFT, STLA, NVDA, GOOGL, META, TSLA for example")
 
 # Display a loading message while the calculation is in progress
 if st.session_state['ticker_entered']:
-    with st.spinner('Calculating...'):
-        perform_function()
+    with st.spinner("Calculating...."):
+        time.sleep(3)
+        # perform_api_call(ticker)
+        # display_images()
+        # display_summary()
+        st.session_state['ticker_entered'] = False
+
+
+# # Display a loading message while the calculation is in progress
+# if st.session_state['ticker_entered']:
+#     with st.spinner('<span class="custom-spinner">Loading...</span>'):
+#         time.sleep(3)
+#         # perform_api_call(ticker)
+#         # display_images()
+#         # display_summary()
+#         st.session_state['ticker_entered'] = False
+
+
+# progress_text = "Operation in progress. Please wait."
+# my_bar = st.progress(0, text=progress_text)
+
+# for percent_complete in range(100):
+#     time.sleep(0.01)
+#     my_bar.progress(percent_complete + 1, text=progress_text)
+# time.sleep(1)
+# my_bar.empty()
+
+# st.button("Rerun")
