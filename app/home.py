@@ -64,30 +64,7 @@ ticker = st.text_input(label = "Please enter a valid stock ticker :",
 # Display a loading message while the calculation is in progress
 if st.session_state['ticker_entered']:
     with st.spinner("Calculating...."):
-        time.sleep(3)
-        # perform_api_call(ticker)
-        # display_images()
-        # display_summary()
+        perform_api_call(ticker)
+        display_images()
+        display_summary()
         st.session_state['ticker_entered'] = False
-
-
-# # Display a loading message while the calculation is in progress
-# if st.session_state['ticker_entered']:
-#     with st.spinner('<span class="custom-spinner">Loading...</span>'):
-#         time.sleep(3)
-#         # perform_api_call(ticker)
-#         # display_images()
-#         # display_summary()
-#         st.session_state['ticker_entered'] = False
-
-
-# progress_text = "Operation in progress. Please wait."
-# my_bar = st.progress(0, text=progress_text)
-
-# for percent_complete in range(100):
-#     time.sleep(0.01)
-#     my_bar.progress(percent_complete + 1, text=progress_text)
-# time.sleep(1)
-# my_bar.empty()
-
-# st.button("Rerun")
