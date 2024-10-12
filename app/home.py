@@ -5,7 +5,10 @@ from app.delete_create import delete_create_folder, prepare
 from app.api import perform_api_call
 from app.data import retrieve_currency_api, \
     retrieve_short_name_api,retrieve_values
-from app.display import display_images, display_summary,plot_actual_predictions_api
+from app.display import display_images, display_summary,\
+    plot_train_actual_predictions_api,\
+    plot_actual_predictions_api,\
+    plot_actual_predictions_last_values_api
 
 if 'ticker_entered' not in st.session_state:
     st.session_state['ticker_entered'] = False
@@ -81,10 +84,15 @@ if st.session_state['ticker_entered']:
         print(f"Shape of y_train_dates : {y_train_dates.shape}")
         print(f"Shape of y_test_dates : {y_test_dates.shape}")
 
-
-        plot_actual_predictions_api(y_train, y_train_dates,\
+        plot_train_actual_predictions_api(y_train, y_train_dates,\
                                         y_test, y_test_dates, y_pred, \
                                         short_name, currency)
+
+        plot_actual_predictions_api(y_test, y_test_dates, y_pred, \
+                                short_name, currency)
+
+        plot_actual_predictions_last_values_api(y_test, y_test_dates, y_pred, \
+                                short_name, currency)
         # plot_actual_predictions_api()
         # display_images()
         # display_summary()
