@@ -1,7 +1,7 @@
 import streamlit as st
 import time
 
-from app.delete_create import delete_create_folder, prepare
+from app.delete_create import prepare
 from app.api import perform_api_call
 from app.data import retrieve_currency_api, \
     retrieve_short_name_api,retrieve_values
@@ -93,7 +93,7 @@ if st.session_state['ticker_entered']:
 
         plot_actual_predictions_last_values_api(y_test, y_test_dates, y_pred, \
                                 short_name, currency)
-        # plot_actual_predictions_api()
+
         # display_images()
         # display_summary()
         st.session_state['ticker_entered'] = False
