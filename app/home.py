@@ -3,7 +3,9 @@ import time
 
 from app.delete_create import delete_create_folder, prepare
 from app.api import perform_api_call
-from app.display import display_images, display_summary
+from app.data import retrieve_currency_api, \
+    retrieve_short_name_api,retrieve_values
+from app.display import display_images, display_summary,plot_actual_predictions_api
 
 if 'ticker_entered' not in st.session_state:
     st.session_state['ticker_entered'] = False
@@ -65,6 +67,25 @@ ticker = st.text_input(label = "Please enter a valid stock ticker :",
 if st.session_state['ticker_entered']:
     with st.spinner("Calculating...."):
         perform_api_call(ticker)
-        display_images()
-        display_summary()
+        currency = retrieve_currency_api()
+        short_name = retrieve_short_name_api()
+        y_train = retrieve_values('y_train')
+        y_test = retrieve_values('y_test')
+        y_pred = retrieve_values('y_pred')
+        y_train_dates = retrieve_values('y_train_dates')
+        y_test_dates = retrieve_values('y_test_dates')
+
+        print(f"Shape of y_train : {y_train.shape}")
+        print(f"Shape of y_test : {y_test.shape}")
+        print(f"Shape of y_pred : {y_pred.shape}")
+        print(f"Shape of y_train_dates : {y_train_dates.shape}")
+        print(f"Shape of y_test_dates : {y_test_dates.shape}")
+
+
+        plot_actual_predictions_api(y_train, y_train_dates,\
+                                        y_test, y_test_dates, y_pred, \
+                                        short_name, currency)
+        # plot_actual_predictions_api()
+        # display_images()
+        # display_summary()
         st.session_state['ticker_entered'] = False
