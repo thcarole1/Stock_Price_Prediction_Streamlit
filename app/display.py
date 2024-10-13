@@ -1,10 +1,15 @@
 import streamlit as st
 import os
 from PIL import Image
+import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+
+# Load custom CSS
+with open("app/css/styles.css") as f:
+    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 def display_images():
     # ******************** Display images ***********************************
@@ -282,41 +287,44 @@ def plot_display_all(y_train, y_train_dates,\
 
     # Set title and its color
     axes[0].set_title(f'Prediction of {short_name} stock price with LSTM',
-                        fontsize=18,
-                        color='#EDF0F5')  # Change title color
+                        fontsize=22,
+                        color='#F9D09F')  # Change title color
     axes[1].set_title(f'Prediction of {short_name} stock price with LSTM',
-                        fontsize=18,
-                        color='#EDF0F5')  # Change title color
+                        fontsize=22,
+                        color='#F9D09F')  # Change title color
     axes[2].set_title(f'Prediction of {short_name} stock price with LSTM on the last {number_last} days',
-                        fontsize=18,
-                        color='#EDF0F5')  # Change title color
+                        fontsize=22,
+                        color='#F9D09F')  # Change title color
 
     # Set legend
     axes[0].legend(['Training data', 'Actual data', 'Predictions'],
                    loc='upper left',
                    facecolor = '#000000',
-                   labelcolor = '#EDF0F5',
-                   edgecolor = '#000000')
+                   labelcolor = '#F9D09F',
+                   edgecolor = '#000000',
+                   fontsize = 'xx-large')
     axes[1].legend(['Actual data', 'Predictions'],
                    loc='upper left',
                    facecolor = '#000000',
-                   labelcolor = '#EDF0F5',
-                   edgecolor = '#000000')
+                   labelcolor = '#F9D09F',
+                   edgecolor = '#000000',
+                   fontsize = 'xx-large')
     axes[2].legend(['Actual data', 'Predictions'],
                    loc='upper left',
                    facecolor = '#000000',
-                   labelcolor = '#EDF0F5',
-                   edgecolor = '#000000')
+                   labelcolor = '#F9D09F',
+                   edgecolor = '#000000',
+                   fontsize = 'xx-large')
 
     # Set X-axis label and change its color
-    axes[0].set_xlabel('Date', fontsize=18, color='#EDF0F5')
-    axes[1].set_xlabel('Date', fontsize=18, color='#EDF0F5')
-    axes[2].set_xlabel('Date', fontsize=18, color='#EDF0F5')
+    axes[0].set_xlabel('Date', fontsize=18, color='#F9D09F')
+    axes[1].set_xlabel('Date', fontsize=18, color='#F9D09F')
+    axes[2].set_xlabel('Date', fontsize=18, color='#F9D09F')
 
     # Set Y-axis label and change its color
-    axes[0].set_ylabel(f'Close price in {currency}',fontsize=18,color='#EDF0F5')
-    axes[1].set_ylabel(f'Close price in {currency}',fontsize=18,color='#EDF0F5')
-    axes[2].set_ylabel(f'Close price in {currency}',fontsize=18,color='#EDF0F5')
+    axes[0].set_ylabel(f'Close price in {currency}',fontsize=18,color='#F9D09F')
+    axes[1].set_ylabel(f'Close price in {currency}',fontsize=18,color='#F9D09F')
+    axes[2].set_ylabel(f'Close price in {currency}',fontsize=18,color='#F9D09F')
 
     # Configure grid
     # axes[0].grid(visible = True, linestyle = '--')
@@ -338,12 +346,12 @@ def plot_display_all(y_train, y_train_dates,\
     axes[2].spines['bottom'].set_color('#EDF0F5')
 
     # Set major tick label color
-    axes[0].tick_params(axis='x',colors='#EDF0F5')  # Set X-axis tick label color
-    axes[0].tick_params(axis='y',colors='#EDF0F5')  # Set Y-axis tick label color
-    axes[1].tick_params(axis='x',colors='#EDF0F5')  # Set X-axis tick label color
-    axes[1].tick_params(axis='y',colors='#EDF0F5')  # Set Y-axis tick label color
-    axes[2].tick_params(axis='x',colors='#EDF0F5')  # Set X-axis tick label color
-    axes[2].tick_params(axis='y',colors='#EDF0F5')  # Set Y-axis tick label color
+    axes[0].tick_params(axis='x',colors='#F9D09F')  # Set X-axis tick label color
+    axes[0].tick_params(axis='y',colors='#F9D09F')  # Set Y-axis tick label color
+    axes[1].tick_params(axis='x',colors='#F9D09F')  # Set X-axis tick label color
+    axes[1].tick_params(axis='y',colors='#F9D09F')  # Set Y-axis tick label color
+    axes[2].tick_params(axis='x',colors='#F9D09F')  # Set X-axis tick label color
+    axes[2].tick_params(axis='y',colors='#F9D09F')  # Set Y-axis tick label color
 
     # Set major ticks to show only years
     axes[0].xaxis.set_major_locator(mdates.YearLocator(1))  # Show every year
@@ -362,5 +370,33 @@ def plot_display_all(y_train, y_train_dates,\
 
     st.pyplot(plt)
 
-def create_summary():
-    return  ''
+def create_summary(y_test, y_pred, y_test_dates):
+    '''
+    This function creates a summary dataframe describing
+    actual unseen values (y_test), predictions (y_pred)
+    and delta (absolute value btw both).
+    Returns a pandas dataframe.
+    '''
+    # Create a pandas dataframe with actual data (y_test) and predictions (y_pred)
+    actual_and_pred = pd.merge(y_test, y_pred, left_index=True, right_index=True)
+
+    # New column with absolute value of difference between actual and predicted values
+    actual_and_pred['diff_actual_pred'] = actual_and_pred['y_test'] - actual_and_pred['y_pred']
+    actual_and_pred['absolute_diff'] = np.abs(actual_and_pred['y_test'] - actual_and_pred['y_pred'])
+
+    # Create summary
+    summary = actual_and_pred.describe()
+    # print(summary)
+
+    # Display HTML Table title
+    st.markdown("""<h2 class="subtitle"> Statistical properties </h2> """, unsafe_allow_html=True)
+
+    # Convert the DataFrame to HTML
+    html = summary.to_html(classes='table table-striped', index=True)
+
+    # Display the HTML in Streamlit
+    st.markdown(html, unsafe_allow_html=True)
+
+    print(summary)
+    summary.iloc[0] = summary.iloc[0].astype(int)
+    print(type(summary.iloc[0].values[0]))

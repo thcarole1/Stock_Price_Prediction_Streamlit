@@ -3,8 +3,6 @@ import zipfile
 import requests
 
 def perform_api_call(ticker : str):
-    # st.write(text = f"The chosen ticker is {ticker}.")
-
     # ************************** Connection to API ***************************************
     # API endpoint
     URL = "https://stockpriceprediction-yyzifgu2zq-od.a.run.app/ticker/"
