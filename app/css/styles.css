@@ -1,0 +1,51 @@
+.table {
+  border: 1px solid red;
+  color : #EDF0F5;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+th {
+  color : #F9D09F;
+  text-align: center;
+}
+
+td {
+  color : #EDF0F5;
+  text-align: center;
+}
+
+caption {
+      color :#EDF0F5;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+}
+.stApp {
+  background-color: #000000;
+}
+
+.title {
+  text-align: center;
+  color : #F9D09F;
+}
+.subtitle {
+  text-align: center;
+  color : #F9D09F;
+  font-size: 1.4em;
+}
+.first-sentence {
+  text-align: left;
+  margin-top: 20px;
+  font-size: 1.2em;
+}
+
+div[data-testid="stTextInput"] > label {
+  color : #EDF0F5;
+  font-size: 1.2em;
+}
+
+.custom-spinner {
+  color: orange;  /* Change to your desired color */
+  font-size: 20px;  /* Optional: adjust font size */
+}
