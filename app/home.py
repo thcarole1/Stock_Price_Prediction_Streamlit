@@ -11,7 +11,8 @@ from app.data import retrieve_currency_api, \
 from app.display import display_images, display_summary,\
     plot_train_actual_predictions_api,\
     plot_actual_predictions_api,\
-    plot_actual_predictions_last_values_api
+    plot_actual_predictions_last_values_api,\
+    plot_display_all
 
 if 'ticker_entered' not in st.session_state:
     st.session_state['ticker_entered'] = False
@@ -60,50 +61,75 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Retrieve ticker from user
-ticker = st.text_input(label = "Please enter a valid stock ticker :",
-              value="",
-              max_chars=4,
-              key=None,
-              type="default",
-              on_change=prepare,
-              placeholder="AAPL, MSFT, STLA, NVDA, GOOGL, META, TSLA for example")
+# # Retrieve ticker from user
+# ticker = st.text_input(label = "Please enter a valid stock ticker :",
+#               value="",
+#               max_chars=4,
+#               key=None,
+#               type="default",
+#               on_change=prepare,
+#               placeholder="AAPL, MSFT, STLA, NVDA, GOOGL, META, TSLA for example")
 
-# Display a loading message while the calculation is in progress
-if st.session_state['ticker_entered']:
-    with st.spinner("Calculating...."):
-        perform_api_call(ticker)
-        currency = retrieve_currency_api()
-        short_name = retrieve_short_name_api()
-        y_train = retrieve_values('y_train')
-        y_test = retrieve_values('y_test')
-        y_pred = retrieve_values('y_pred')
-        y_train_dates = retrieve_values('y_train_dates')
-        y_test_dates = retrieve_values('y_test_dates')
+# # Display a loading message while the calculation is in progress
+# if st.session_state['ticker_entered']:
+#     with st.spinner("Calculating...."):
+#         perform_api_call(ticker)
+#         currency = retrieve_currency_api()
+#         short_name = retrieve_short_name_api()
+#         y_train = retrieve_values('y_train')
+#         y_test = retrieve_values('y_test')
+#         y_pred = retrieve_values('y_pred')
+#         y_train_dates = retrieve_values('y_train_dates')
+#         y_test_dates = retrieve_values('y_test_dates')
 
-        # Transform dates to datetime
-        y_train_dates = y_train_dates.iloc[:,0]
-        y_train_dates = pd.to_datetime(y_train_dates)
+#         # Transform dates to datetime
+#         y_train_dates = y_train_dates.iloc[:,0]
+#         y_train_dates = pd.to_datetime(y_train_dates)
 
-        y_test_dates = y_test_dates.iloc[:,0]
-        y_test_dates = pd.to_datetime(y_test_dates)
+#         y_test_dates = y_test_dates.iloc[:,0]
+#         y_test_dates = pd.to_datetime(y_test_dates)
 
-        print(f"Shape of y_train : {y_train.shape}")
-        print(f"Shape of y_test : {y_test.shape}")
-        print(f"Shape of y_pred : {y_pred.shape}")
-        print(f"Shape of y_train_dates : {y_train_dates.shape}")
-        print(f"Shape of y_test_dates : {y_test_dates.shape}")
+#         print(f"Shape of y_train : {y_train.shape}")
+#         print(f"Shape of y_test : {y_test.shape}")
+#         print(f"Shape of y_pred : {y_pred.shape}")
+#         print(f"Shape of y_train_dates : {y_train_dates.shape}")
+#         print(f"Shape of y_test_dates : {y_test_dates.shape}")
 
-        plot_train_actual_predictions_api(y_train, y_train_dates,\
-                                        y_test, y_test_dates, y_pred, \
-                                        short_name, currency)
+#         plot_display_all(y_train, y_train_dates,\
+#                         y_test, y_test_dates, y_pred, \
+#                         short_name, currency)
 
-        plot_actual_predictions_api(y_test, y_test_dates, y_pred, \
+#         # plot_train_actual_predictions_api(y_train, y_train_dates,\
+#         #                                 y_test, y_test_dates, y_pred, \
+#         #                                 short_name, currency)
+
+#         # plot_actual_predictions_api(y_test, y_test_dates, y_pred, \
+#         #                         short_name, currency)
+
+#         # plot_actual_predictions_last_values_api(y_test, y_test_dates, y_pred, \
+#         #                         short_name, currency)
+
+#         # display_images()
+#         # display_summary()
+#         st.session_state['ticker_entered'] = False
+
+
+currency = retrieve_currency_api()
+short_name = retrieve_short_name_api()
+y_train = retrieve_values('y_train')
+y_test = retrieve_values('y_test')
+y_pred = retrieve_values('y_pred')
+y_train_dates = retrieve_values('y_train_dates')
+y_test_dates = retrieve_values('y_test_dates')
+
+# Transform dates to datetime
+y_train_dates = y_train_dates.iloc[:,0]
+y_train_dates = pd.to_datetime(y_train_dates)
+
+y_test_dates = y_test_dates.iloc[:,0]
+y_test_dates = pd.to_datetime(y_test_dates)
+
+
+plot_display_all(y_train, y_train_dates,\
+                                y_test, y_test_dates, y_pred, \
                                 short_name, currency)
-
-        plot_actual_predictions_last_values_api(y_test, y_test_dates, y_pred, \
-                                short_name, currency)
-
-        # display_images()
-        # display_summary()
-        st.session_state['ticker_entered'] = False
