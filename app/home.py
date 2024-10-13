@@ -1,14 +1,14 @@
 import streamlit as st
 import pandas as pd
 
-from app.delete_create import prepare
+from delete_create import prepare
 
-from app.api import perform_api_call
+from api import perform_api_call
 
-from app.data import retrieve_currency_api, \
+from data import retrieve_currency_api, \
     retrieve_short_name_api,retrieve_values
 
-from app.display import display_images, display_summary,\
+from display import display_images, display_summary,\
     plot_train_actual_predictions_api,\
     plot_actual_predictions_api,\
     plot_actual_predictions_last_values_api,\

@@ -2,7 +2,6 @@ import streamlit as st
 import os
 import shutil
 
-
 # *********  Erase and create folder  **************************************
 def delete_create_folder(folder_name):
     # Delete folder if it exists
