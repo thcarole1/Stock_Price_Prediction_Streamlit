@@ -229,3 +229,63 @@ def plot_actual_predictions_last_values_api(y_test, y_test_dates, y_pred, \
     plt.tight_layout()
 
     st.pyplot(plt)
+
+
+def plot_display_all(y_train, y_train_dates,\
+                                y_test, y_test_dates, y_pred, \
+                                short_name, currency):
+    # Subplots
+    fig, axes = plt.subplots(nrows=3,
+                           ncols=1,
+                           figsize=(16,8))
+
+    # Plot stock prices : training data vs actual vs predicted
+    sns.lineplot(x=y_train_dates,
+                 y=y_train['y_train'],
+                 ax = axes[0])
+    sns.lineplot(x=y_test_dates,
+                 y=y_test['y_test'],
+                #  color = '#DCB484',
+                 color = 'red',
+                 linestyle = '--',
+                 ax = axes[0])
+    sns.lineplot(x=y_test_dates,
+                 y=y_pred['y_pred'],
+                color='#FF961A',
+                ax = axes[0])
+
+    # Plot stock prices : actual vs predicted
+    sns.lineplot(x=y_test_dates,
+                 y=y_test['y_test'],
+                #  color = '#DCB484',
+                color = 'red',
+                linestyle = '--',
+                ax = axes[1])
+    sns.lineplot(x=y_test_dates,
+                 y=y_pred['y_pred'],
+                color='#FF961A',
+                ax = axes[1])
+
+    # Plot stock prices : actual vs predicted (LIMITED VALUES)
+    number_last = 100
+    sns.lineplot(x=y_test_dates.iloc[-number_last:],
+                 y=y_test['y_test'].iloc[-number_last:],
+                #  color = '#DCB484',
+                 color = 'red',
+                 linestyle = '--',
+                ax = axes[2])
+    sns.lineplot(x=y_test_dates.iloc[-number_last:],
+                 y=y_pred['y_pred'].iloc[-number_last:],
+                 color='#FF961A',
+                ax = axes[2])
+
+    # Change the figure background color
+    fig.patch.set_facecolor('#000000') # Set figure background color
+    axes[0].set_facecolor('#000000') # Set background color of the plot
+    axes[1].set_facecolor('#000000') # Set background color of the plot
+    axes[2].set_facecolor('#000000') # Set background color of the plot
+
+
+    st.pyplot(plt)
+
+    return 'toto'
