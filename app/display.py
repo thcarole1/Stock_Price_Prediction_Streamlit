@@ -361,3 +361,6 @@ def plot_display_all(y_train, y_train_dates,\
     plt.subplots_adjust(hspace=0.3)  # hspace adjusts the height spacing between rows
 
     st.pyplot(plt)
+
+def create_summary():
+    return  ''
