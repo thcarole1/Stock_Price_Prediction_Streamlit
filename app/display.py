@@ -237,7 +237,7 @@ def plot_display_all(y_train, y_train_dates,\
                                 short_name, currency):
     # Subplots
     # fig, axes = plt.subplots(nrows=3, ncols=1, figsize=(16,8))
-    fig, axes = plt.subplots(nrows=3, ncols=1, figsize=(16,24))
+    fig, axes = plt.subplots(nrows=4, ncols=1, figsize=(16,24))
 
     # Plot stock prices : training data vs actual vs predicted
     sns.lineplot(x=y_train_dates,
@@ -279,11 +279,17 @@ def plot_display_all(y_train, y_train_dates,\
                  color='#FF961A',
                 ax = axes[2])
 
+    # breakpoint()
+    # Plot normal distributions : actual vs predicted
+    sns.kdeplot(data=y_test.y_test.tolist(), color = 'red')
+    sns.kdeplot(data=y_pred.y_pred.tolist(), color='#FF961A')
+
     # Change the figure background color
     fig.patch.set_facecolor('#000000') # Set figure background color
     axes[0].set_facecolor('#000000') # Set background color of the plot
     axes[1].set_facecolor('#000000') # Set background color of the plot
     axes[2].set_facecolor('#000000') # Set background color of the plot
+    axes[3].set_facecolor('#000000') # Set background color of the plot
 
     # Set title and its color
     axes[0].set_title(f'Prediction of {short_name} stock price with LSTM',
@@ -295,6 +301,9 @@ def plot_display_all(y_train, y_train_dates,\
     axes[2].set_title(f'Prediction of {short_name} stock price with LSTM on the last {number_last} days',
                         fontsize=22,
                         color='#F9D09F')  # Change title color
+    axes[3].set_title(f'Prediction of {short_name} stock price with LSTM - Distributions (kernel density estimation)',
+                    fontsize=22,
+                    color='#F9D09F')  # Change title color
 
     # Set legend
     axes[0].legend(['Training data', 'Actual data', 'Predictions'],
@@ -315,16 +324,24 @@ def plot_display_all(y_train, y_train_dates,\
                    labelcolor = '#F9D09F',
                    edgecolor = '#000000',
                    fontsize = 'xx-large')
+    axes[3].legend(['Actual data', 'Predictions'],
+                loc='upper left',
+                facecolor = '#000000',
+                labelcolor = '#F9D09F',
+                edgecolor = '#000000',
+                fontsize = 'xx-large')
 
     # Set X-axis label and change its color
     axes[0].set_xlabel('Date', fontsize=18, color='#F9D09F')
     axes[1].set_xlabel('Date', fontsize=18, color='#F9D09F')
     axes[2].set_xlabel('Date', fontsize=18, color='#F9D09F')
+    axes[3].set_xlabel(f'Stock Price in {currency}', fontsize=18, color='#F9D09F')
 
     # Set Y-axis label and change its color
     axes[0].set_ylabel(f'Close price in {currency}',fontsize=18,color='#F9D09F')
     axes[1].set_ylabel(f'Close price in {currency}',fontsize=18,color='#F9D09F')
     axes[2].set_ylabel(f'Close price in {currency}',fontsize=18,color='#F9D09F')
+    axes[3].set_ylabel(f'Density',fontsize=18,color='#F9D09F')
 
     # Configure grid
     # axes[0].grid(visible = True, linestyle = '--')
@@ -345,6 +362,11 @@ def plot_display_all(y_train, y_train_dates,\
     axes[2].spines['left'].set_color('#EDF0F5')
     axes[2].spines['bottom'].set_color('#EDF0F5')
 
+    axes[3].spines['top'].set_color('none')
+    axes[3].spines['right'].set_color('none')
+    axes[3].spines['left'].set_color('#EDF0F5')
+    axes[3].spines['bottom'].set_color('#EDF0F5')
+
     # Set major tick label color
     axes[0].tick_params(axis='x',colors='#F9D09F')  # Set X-axis tick label color
     axes[0].tick_params(axis='y',colors='#F9D09F')  # Set Y-axis tick label color
@@ -352,6 +374,8 @@ def plot_display_all(y_train, y_train_dates,\
     axes[1].tick_params(axis='y',colors='#F9D09F')  # Set Y-axis tick label color
     axes[2].tick_params(axis='x',colors='#F9D09F')  # Set X-axis tick label color
     axes[2].tick_params(axis='y',colors='#F9D09F')  # Set Y-axis tick label color
+    axes[3].tick_params(axis='x',colors='#F9D09F')  # Set X-axis tick label color
+    axes[3].tick_params(axis='y',colors='#F9D09F')  # Set Y-axis tick label color
 
     # Set major ticks to show only years
     axes[0].xaxis.set_major_locator(mdates.YearLocator(1))  # Show every year
