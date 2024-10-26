@@ -53,11 +53,29 @@ div[data-testid="stTextInput"] > label {
 .subtitle_2 {
   text-align: left;
   color : #F9D09F;
+  font-size
+  : 0.8em;
+}
+
+.subtitle_0 {
+  text-align: center;
+  color : #F9D09F;
   font-size: 0.8em;
 }
 
 .arrow_style {
-  text-align: left;
+  text-align: center;
   color : #F9D09F;
   font-size: 0.8em;
+}
+
+.custom-container {
+  border: 1px solid #F9D09F;  /* Change this to your desired border color */
+  border-radius: 10px;         /* Optional: Rounded corners */
+  padding: 10px;               /* Padding inside the container */
+}
+
+svg{
+  width: 0;
+  height: 0;
 }

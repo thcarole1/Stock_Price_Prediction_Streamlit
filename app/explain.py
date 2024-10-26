@@ -14,30 +14,42 @@ def display_row(data):
     with col3:
         st.markdown(f"""<h2 class="subtitle_2"> {data[3]} </h2> """, unsafe_allow_html=True)
 
-
 def display_row_0():
     '''    Display content in row     '''
     col_number = 4
+    cols_width = [0.1, 0.2, 0.4, 0.2]
+    col0, col1, col2, col3= st.columns(col_number,
+                                       gap="medium",
+                                       vertical_alignment="center")
+    # col0, col1, col2, col3= st.columns(cols_width, vertical_alignment="center")
 
-    # First row of columns (4 columns)
-    col0, col1, col2, col3= st.columns(col_number)
     with col0:
-        st.markdown("""<h2 class="subtitle_2">Number</h2> """, unsafe_allow_html=True)
+        st.markdown("""<h2 class="subtitle_0">Step Number</h2> """, unsafe_allow_html=True)
     with col1:
-        st.markdown("""<h2 class="subtitle_2">Steps</h2> """, unsafe_allow_html=True)
+        st.markdown("""<h2 class="subtitle_0">Steps</h2> """, unsafe_allow_html=True)
     with col2:
-        st.markdown("""<h2 class="subtitle_2">Description</h2> """, unsafe_allow_html=True)
+        st.markdown("""<h2 class="subtitle_0">Description</h2> """, unsafe_allow_html=True)
     with col3:
-        st.markdown("""<h2 class="subtitle_2">Technologies used</h2> """, unsafe_allow_html=True)
+        st.markdown("""<h2 class="subtitle_0">Technologies used</h2> """, unsafe_allow_html=True)
 
 def display_row_1():
     '''    Display content in row     '''
     col_number = 4
-    col0, col1, col2, col3= st.columns(col_number)
+    cols_width = [0.1, 0.2, 0.4, 0.2]
+    col0, col1, col2, col3= st.columns(col_number,
+                                       gap="medium",
+                                       vertical_alignment="center")
+    # col0, col1, col2, col3= st.columns(cols_width,
+    #                                    gap="large",
+    #                                    vertical_alignment="center")
     with col0:
-        st.markdown("""<h2 class="subtitle_2">1</h2> """, unsafe_allow_html=True)
+        st.markdown("""<h2 class="subtitle_0">
+                    1
+                    </h2> """, unsafe_allow_html=True)
     with col1:
-        st.markdown("""<h2 class="subtitle_2">Data extraction</h2> """, unsafe_allow_html=True)
+        st.markdown("""<h2 class="subtitle_0 custom-container">
+                    Data extraction
+                    </h2> """, unsafe_allow_html=True)
     with col2:
         st.markdown("""<h2 class="subtitle_2">Extract data
                         from yFinance API : <br>
@@ -55,13 +67,17 @@ def display_row_1():
 def display_row_2():
     '''    Display content in row     '''
     col_number = 4
-    col0, col1, col2, col3= st.columns(col_number)
+    cols_width = [0.1, 0.2, 0.4, 0.2]
+    col0, col1, col2, col3= st.columns(col_number,
+                                       gap="medium",
+                                       vertical_alignment="center")
+    # col0, col1, col2, col3= st.columns(cols_width, vertical_alignment="center")
     with col0:
-        st.markdown("""<h2 class="subtitle_2">
+        st.markdown("""<h2 class="subtitle_0">
                     2
                     </h2> """, unsafe_allow_html=True)
     with col1:
-        st.markdown("""<h2 class="subtitle_2">
+        st.markdown("""<h2 class="subtitle_0 custom-container">
                     Data exploration
                     </h2> """, unsafe_allow_html=True)
     with col2:
@@ -81,13 +97,17 @@ def display_row_2():
 def display_row_3():
     '''    Display content in row     '''
     col_number = 4
-    col0, col1, col2, col3= st.columns(col_number)
+    cols_width = [0.1, 0.2, 0.4, 0.2]
+    col0, col1, col2, col3= st.columns(col_number,
+                                       gap="medium",
+                                       vertical_alignment="center")
+    # col0, col1, col2, col3= st.columns(cols_width, vertical_alignment="center")
     with col0:
-        st.markdown("""<h2 class="subtitle_2">
+        st.markdown("""<h2 class="subtitle_0">
                     3
                     </h2> """, unsafe_allow_html=True)
     with col1:
-        st.markdown("""<h2 class="subtitle_2">
+        st.markdown("""<h2 class="subtitle_0 custom-container">
                     Data cleaning <br>
                     and <br>
                     feature engineering
@@ -111,14 +131,21 @@ def display_row_3():
 def display_row_4():
     '''    Display content in row     '''
     col_number = 4
-    col0, col1, col2, col3= st.columns(col_number)
+    cols_width = [0.1, 0.2, 0.4, 0.2]
+    col0, col1, col2, col3= st.columns(col_number,
+                                       gap="medium",
+                                       vertical_alignment="center")
+    # col0, col1, col2, col3= st.columns(cols_width, vertical_alignment="center")
     with col0:
-        st.markdown("""<h2 class="subtitle_2">
+        st.markdown("""<h2 class="subtitle_0">
                     4
                     </h2> """, unsafe_allow_html=True)
     with col1:
-        st.markdown("""<h2 class="subtitle_2">
-                    Define train and test data
+        st.markdown("""<h2 class="subtitle_0 custom-container">
+                    Define <br>
+                    train data <br>
+                    and <br>
+                    test data
                     </h2> """, unsafe_allow_html=True)
     with col2:
         st.markdown("""<h2 class="subtitle_2">
@@ -132,13 +159,17 @@ def display_row_4():
 def display_row_5():
     '''    Display content in row     '''
     col_number = 4
-    col0, col1, col2, col3= st.columns(col_number)
+    cols_width = [0.1, 0.2, 0.4, 0.2]
+    col0, col1, col2, col3= st.columns(col_number,
+                                       gap="medium",
+                                       vertical_alignment="center")
+    # col0, col1, col2, col3= st.columns(cols_width, vertical_alignment="center")
     with col0:
-        st.markdown("""<h2 class="subtitle_2">
+        st.markdown("""<h2 class="subtitle_0">
                     5
                     </h2> """, unsafe_allow_html=True)
     with col1:
-        st.markdown("""<h2 class="subtitle_2">
+        st.markdown("""<h2 class="subtitle_0 custom-container">
                     Modeling
                     </h2> """, unsafe_allow_html=True)
     with col2:
@@ -156,18 +187,22 @@ def display_row_5():
 def display_row_6():
     '''    Display content in row     '''
     col_number = 4
-    col0, col1, col2, col3= st.columns(col_number)
+    cols_width = [0.1, 0.2, 0.4, 0.2]
+    col0, col1, col2, col3= st.columns(col_number,
+                                       gap="medium",
+                                       vertical_alignment="center")
+    # col0, col1, col2, col3= st.columns(cols_width, vertical_alignment="center")
     with col0:
-        st.markdown("""<h2 class="subtitle_2">
+        st.markdown("""<h2 class="subtitle_0">
                     6
                     </h2> """, unsafe_allow_html=True)
     with col1:
-        st.markdown("""<h2 class="subtitle_2">
-                    Training the model
+        st.markdown("""<h2 class="subtitle_0 custom-container">
+                    Model training
                     </h2> """, unsafe_allow_html=True)
     with col2:
         st.markdown("""<h2 class="subtitle_2">
-                    Training the model
+                    Training the model with the train data
                     </h2> """, unsafe_allow_html=True)
     with col3:
         st.markdown("""<h2 class="subtitle_2">
@@ -178,18 +213,22 @@ def display_row_6():
 def display_row_7():
     '''    Display content in row     '''
     col_number = 4
-    col0, col1, col2, col3= st.columns(col_number)
+    cols_width = [0.1, 0.2, 0.4, 0.2]
+    col0, col1, col2, col3= st.columns(col_number,
+                                       gap="medium",
+                                       vertical_alignment="center")
+    # col0, col1, col2, col3= st.columns(cols_width, vertical_alignment="center")
     with col0:
-        st.markdown("""<h2 class="subtitle_2">
+        st.markdown("""<h2 class="subtitle_0">
                     7
                     </h2> """, unsafe_allow_html=True)
     with col1:
-        st.markdown("""<h2 class="subtitle_2">
+        st.markdown("""<h2 class="subtitle_0 custom-container">
                     Model Evaluation
                     </h2> """, unsafe_allow_html=True)
     with col2:
         st.markdown("""<h2 class="subtitle_2">
-                    Model Evaluation
+                    Evaluating the model with the test data
                     </h2> """, unsafe_allow_html=True)
     with col3:
         st.markdown("""<h2 class="subtitle_2">
@@ -199,13 +238,17 @@ def display_row_7():
 def display_row_8():
     '''    Display content in row     '''
     col_number = 4
-    col0, col1, col2, col3= st.columns(col_number)
+    cols_width = [0.1, 0.2, 0.4, 0.2]
+    col0, col1, col2, col3= st.columns(col_number,
+                                       gap="medium",
+                                       vertical_alignment="center")
+    # col0, col1, col2, col3= st.columns(cols_width, vertical_alignment="center")
     with col0:
-        st.markdown("""<h2 class="subtitle_2">
+        st.markdown("""<h2 class="subtitle_0">
                     8
                     </h2> """, unsafe_allow_html=True)
     with col1:
-        st.markdown("""<h2 class="subtitle_2">
+        st.markdown("""<h2 class="subtitle_0 custom-container">
                     Predictions
                     </h2> """, unsafe_allow_html=True)
     with col2:
@@ -221,13 +264,17 @@ def display_row_8():
 def display_row_9():
     '''    Display content in row     '''
     col_number = 4
-    col0, col1, col2, col3= st.columns(col_number)
+    cols_width = [0.1, 0.2, 0.4, 0.2]
+    col0, col1, col2, col3= st.columns(col_number,
+                                       gap="medium",
+                                       vertical_alignment="center")
+    # col0, col1, col2, col3= st.columns(cols_width, vertical_alignment="center")
     with col0:
-        st.markdown("""<h2 class="subtitle_2">
+        st.markdown("""<h2 class="subtitle_0">
                     9
                     </h2> """, unsafe_allow_html=True)
     with col1:
-        st.markdown("""<h2 class="subtitle_2">
+        st.markdown("""<h2 class="subtitle_0 custom-container">
                     Analysis test data <br>
                     and predictions
                     </h2> """, unsafe_allow_html=True)
@@ -242,7 +289,6 @@ def display_row_9():
                     - distribution
                     </h2> """, unsafe_allow_html=True)
 
-
 def display_arrow():
     '''    Display content in row     '''
     col_number = 4
@@ -253,18 +299,33 @@ def display_arrow():
         #                 ↗  Red Up-Right Arrow
         #                 </span>""", unsafe_allow_html=True)
 
+        # st.markdown(
+        #             """
+        #             <div style="border-left: 3px solid red; height: 20px; display: inline-block; margin-right: 5px;"><span style="font-size:24px;">→</span></div>
+
+        #             """,
+        #             unsafe_allow_html=True)
+
+#         st.markdown(
+#                     """
+#                     <div class="custom-container"><h2 class="subtitle_0">Number</h2></div>
+#                     <span class="arrow_style">↓</span>
+#                     """,
+#                     unsafe_allow_html=True
+# )
+
         st.markdown(
                     """
-                    <div style="border-left: 3px solid red; height: 20px; display: inline-block; margin-right: 5px;"><span style="font-size:24px;">→</span></div>
-
+                    <h2 class="subtitle_0 custom-container"">Number</h2>
+                    <span class="arrow_style">↓</span>
                     """,
-                    unsafe_allow_html=True)
-
+                    unsafe_allow_html=True
+)
 
 def display_rows():
     display_row_0()
     display_row_1()
-    display_arrow()
+    # display_arrow()
     display_row_2()
     display_row_3()
     display_row_4()
@@ -286,11 +347,3 @@ def display_rows():
     #     st.markdown("""<pre class="subtitle_2">Description</pre> """, unsafe_allow_html=True)
     # with col3:
     #     st.markdown("""<pre class="subtitle_2">Technologies used</pre> """, unsafe_allow_html=True)
-
-
-
-# data_to_display_1 = ['Number', 'Steps', 'Description', 'Technologies used']
-# data_to_display_2 = ['1',
-#                     'Data extraction',
-#                     'Extract data from yFinance API :\n Temporal data,company name and currency',
-#                     'yFinance API, Python, Pandas']

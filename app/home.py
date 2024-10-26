@@ -3,6 +3,8 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+st.set_page_config(page_title="HR Data Analytics")
+
 from delete_create import prepare
 
 from api import perform_api_call
@@ -41,40 +43,40 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# # Retrieve ticker from user
-# ticker = st.text_input(label = "Please enter a valid stock ticker :",
-#               value="",
-#               max_chars=4,
-#               key=None,
-#               type="default",
-#               on_change=prepare,
-#               placeholder="AAPL, MSFT, STLA, NVDA, GOOGL, META, TSLA for example")
+# Retrieve ticker from user
+ticker = st.text_input(label = "Please enter a valid stock ticker :",
+              value="",
+              max_chars=4,
+              key=None,
+              type="default",
+              on_change=prepare,
+              placeholder="AAPL, MSFT, STLA, NVDA, GOOGL, META, TSLA for example")
 
-# # Display a loading message while the calculation is in progress
-# if st.session_state['ticker_entered']:
-#     with st.spinner("Calculating...."):
-#         perform_api_call(ticker)
-#         # Retrieve info from api call response (ZIP file)
-#         currency = retrieve_currency_api()
-#         short_name = retrieve_short_name_api()
-#         y_train = retrieve_values('y_train')
-#         y_test = retrieve_values('y_test')
-#         y_pred = retrieve_values('y_pred')
-#         y_train_dates = retrieve_values('y_train_dates')
-#         y_test_dates = retrieve_values('y_test_dates')
+# Display a loading message while the calculation is in progress
+if st.session_state['ticker_entered']:
+    with st.spinner("Calculating...."):
+        perform_api_call(ticker)
+        # Retrieve info from api call response (ZIP file)
+        currency = retrieve_currency_api()
+        short_name = retrieve_short_name_api()
+        y_train = retrieve_values('y_train')
+        y_test = retrieve_values('y_test')
+        y_pred = retrieve_values('y_pred')
+        y_train_dates = retrieve_values('y_train_dates')
+        y_test_dates = retrieve_values('y_test_dates')
 
-#         # Transform dates to datetime
-#         y_train_dates = y_train_dates.iloc[:,0]
-#         y_train_dates = pd.to_datetime(y_train_dates)
-#         y_test_dates = y_test_dates.iloc[:,0]
-#         y_test_dates = pd.to_datetime(y_test_dates)
+        # Transform dates to datetime
+        y_train_dates = y_train_dates.iloc[:,0]
+        y_train_dates = pd.to_datetime(y_train_dates)
+        y_test_dates = y_test_dates.iloc[:,0]
+        y_test_dates = pd.to_datetime(y_test_dates)
 
-#         plot_display_all(y_train, y_train_dates,\
-#                         y_test, y_test_dates, y_pred, \
-#                         short_name, currency)
+        plot_display_all(y_train, y_train_dates,\
+                        y_test, y_test_dates, y_pred, \
+                        short_name, currency)
 
-#         create_summary(y_test, y_pred, y_test_dates)
-#         st.session_state['ticker_entered'] = False
+        create_summary(y_test, y_pred, y_test_dates)
+        st.session_state['ticker_entered'] = False
 
 
 # currency = retrieve_currency_api()
@@ -99,16 +101,4 @@ st.markdown(
 
 # create_summary(y_test, y_pred, y_test_dates)
 
-
-# data_to_display_1 = ['Number', 'Steps', 'Description', 'Technologies used']
-# data_to_display_2 = ['1',
-#                     'Data extraction',
-#                     'Extract data from yFinance API :\n Temporal data,company name and currency',
-#                     'yFinance API, Python, Pandas']
-
-
-# # data_to_display_2 = ['','','','']
-
-# display_row(data_to_display_1)
-
-display_rows()
+# display_rows()
