@@ -49,3 +49,9 @@ div[data-testid="stTextInput"] > label {
   color: orange;  /* Change to your desired color */
   font-size: 20px;  /* Optional: adjust font size */
 }
+
+.subtitle_2 {
+  text-align: left;
+  color : #F9D09F;
+  font-size: 0.8em;
+}
