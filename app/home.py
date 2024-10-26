@@ -3,6 +3,8 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+st.set_page_config(page_title="HR Data Analytics")
+
 from delete_create import prepare
 
 from api import perform_api_call
@@ -15,6 +17,8 @@ from display import display_images, display_summary,\
     plot_actual_predictions_api,\
     plot_actual_predictions_last_values_api,\
     plot_display_all, create_summary
+
+from explain import display_row, display_rows
 
 # Load custom CSS
 with open("app/css/styles.css") as f:
@@ -96,3 +100,5 @@ if st.session_state['ticker_entered']:
 #                 short_name, currency)
 
 # create_summary(y_test, y_pred, y_test_dates)
+
+# display_rows()
