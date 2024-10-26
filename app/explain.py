@@ -196,7 +196,6 @@ def display_row_7():
                     - Sequential().evaluate()
                     </h2> """, unsafe_allow_html=True)
 
-
 def display_row_8():
     '''    Display content in row     '''
     col_number = 4
@@ -218,7 +217,6 @@ def display_row_8():
                     - Matplotlib.pyplot<br>
                     - Seaborn<br>
                     </h2> """, unsafe_allow_html=True)
-
 
 def display_row_9():
     '''    Display content in row     '''
@@ -244,9 +242,29 @@ def display_row_9():
                     - distribution
                     </h2> """, unsafe_allow_html=True)
 
+
+def display_arrow():
+    '''    Display content in row     '''
+    col_number = 4
+    col0, col1, col2, col3= st.columns(col_number)
+    with col1:
+        # st.markdown("<span style='color:red; font-size: 24px;'>↗  Red Up-Right Arrow YO</span>", unsafe_allow_html=True)
+        # st.markdown("""<span class="arrow_style">
+        #                 ↗  Red Up-Right Arrow
+        #                 </span>""", unsafe_allow_html=True)
+
+        st.markdown(
+                    """
+                    <div style="border-left: 3px solid red; height: 20px; display: inline-block; margin-right: 5px;"><span style="font-size:24px;">→</span></div>
+
+                    """,
+                    unsafe_allow_html=True)
+
+
 def display_rows():
     display_row_0()
     display_row_1()
+    display_arrow()
     display_row_2()
     display_row_3()
     display_row_4()
